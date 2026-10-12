@@ -22,6 +22,7 @@ NUMERIC_FACT_FIELDS = {"start_s", "confirmed_s", "recovered_s", "peak_value"}
 
 
 def canonical_event_fact(event: dict[str, Any]) -> dict[str, Any]:
+    """Return the exact fact contract that a model must copy, not infer."""
     return {
         "event_id": event["evidence_id"],
         "rule_id": event["rule_id"],
@@ -36,6 +37,7 @@ def canonical_event_fact(event: dict[str, Any]) -> dict[str, Any]:
 
 
 def event_aggregates(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Summarize every event locally; aggregates do not imply model inspection."""
     groups: dict[tuple[Any, ...], dict[str, Any]] = {}
     for event in events:
         key = (event["code"], event["rule_id"], event["field"], event.get("channel_id"), event["status"])
@@ -85,6 +87,12 @@ def _exact_fact(supplied: dict[str, Any], expected: dict[str, Any]) -> bool:
 
 
 def validate_conclusion(conclusion: dict[str, Any], toolbox: Toolbox) -> None:
+    """Reject incorrect copied facts, duplicate citations and false full coverage.
+
+    Free prose is not parsed with regular expressions and is not evidence.
+    Consumers must call ``canonicalize_conclusion`` before presenting a result.
+    The application scope is the entire selected dataset, never model-inferred.
+    """
     successful = {call["tool"] for call in toolbox.calls if call["status"] == "complete"}
     if not {"summarize_log", "list_protection_rules", "detect_faults"} <= successful:
         raise ValueError("Agent must inspect the log, rules and detected faults before concluding")
@@ -131,6 +139,7 @@ def validate_conclusion(conclusion: dict[str, Any], toolbox: Toolbox) -> None:
 
 
 def canonicalize_conclusion(conclusion: dict[str, Any], toolbox: Toolbox) -> dict[str, Any]:
+    """Validate facts, then return exclusively application-authored report text."""
     validate_conclusion(conclusion, toolbox)
     events = toolbox.analysis["events"]
     scope = {event["evidence_id"] for event in events}

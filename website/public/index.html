@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="上传 BMS 采样日志，核查保护事件与关键波形。默认规则分析不调用模型，可选择使用自己的 API Key。">
+  <title>BMS 日志分析 · 公开工作台</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <main class="workspace">
+    <header class="topbar">
+      <div><p class="eyebrow">BATTERY DIAGNOSTICS / PUBLIC WORKSPACE</p><h1>BMS 日志分析</h1><p class="intro">上传采样日志，查看规则证据与关键波形。</p></div>
+      <span class="status-pill">公开工作台 · 默认离线</span>
+    </header>
+    <section class="notice">这是软件演示分析，不是实物电池安全认证，也不证明物理故障根因。公开版本会通过 HTTPS 将日志发送至本站服务；“离线”表示不调用模型，不表示日志仅留在浏览器。应用不主动持久化日志与 Key，导出文件由你自行保存。请勿上传敏感生产数据。</section>
+    <form id="analysis-form" class="panel input-panel">
+      <div class="section-heading"><h2>01 / 输入与配置</h2><span class="muted">公开版：UTF-8 CSV · 最大 512 KiB / 3,000 行 / 16 通道</span></div>
+      <div class="upload-row"><label class="file-label" for="csv-file">选择 BMS 日志<input id="csv-file" type="file" accept=".csv,text/csv" required></label><span id="file-status" class="muted">尚未选择文件</span><button type="button" id="load-demo" class="secondary">载入演示数据</button></div>
+      <p class="hint">支持标准四列和额外通道：cell_voltage_v_C01、temperature_c_T01。多通道可用下方附加映射配置。公开版最多 20 条配置规则、5,000 个事件；本地完整版本仍支持 5 MiB / 20,000 行。</p>
+      <div class="mapping-grid" id="column-mapping"></div>
+      <details class="advanced"><summary>高级数据配置</summary><div class="advanced-body">
+        <div class="two-column"><label>附加列映射 JSON（canonical → 原列名）<textarea id="extra-map" rows="3" placeholder='{"cell_voltage_v_C01":"电芯1"}'></textarea></label><label>附加单位 JSON<textarea id="extra-units" rows="3" placeholder='{"cell_voltage_v_C01":"mV"}'></textarea></label></div>
+        <div class="two-column"><label>规则/质量配置 JSON（可选）<textarea id="profile" rows="4" placeholder="使用演示配置；可粘贴项目支持的配置对象"></textarea></label><div><label>电流约定<select id="current-convention"><option value="positive_discharge">正值为放电</option><option value="positive_charge">正值为充电</option></select></label><label>电池组标识（可选）<input id="pack-id" maxlength="128" placeholder="pack-demo"></label></div></div>
+      </div></details>
+      <div class="two-column mode-row"><label>分析模式<select id="mode"><option value="offline">离线规则分析 · 无 API 费用</option><option value="agent">Agent 分析 · 使用本次提供的 Key</option></select></label><label>分析问题<textarea id="question" rows="2" maxlength="4000">分析保护事件与数据质量，引用证据并说明确认和恢复过程。</textarea></label></div>
+      <fieldset id="agent-settings" hidden><legend>仅本次调用 · BYOK</legend><p class="hint">模型调用会使用你本次提供的 Key，并可能在你的 API 账户计费；本站没有作者或共享 Key。Key 经 HTTPS 传至本站服务，仅用于本次请求，提交后立即从输入框清空，失败时需重新填写。Agent 模式还会将必要日志证据发送至 OpenAI。不要把 Key 放入日志或问题中。</p>
+        <div class="two-column"><label>本次 API Key<input id="api-key" type="password" autocomplete="off" spellcheck="false" maxlength="1024"></label><label>你有权限调用的模型 ID<input id="model" autocomplete="off" maxlength="256" placeholder="输入模型 ID"></label></div>
+        <div class="limits-grid"><label>最多轮次<input id="max-turns" type="number" min="4" max="12" value="8"></label><label>超时（秒）<input id="timeout" type="number" min="10" max="60" value="60"></label><label>单轮输出 token<input id="max-output" type="number" min="256" max="2000" value="1200"></label><label>总 token 预算<input id="max-total" type="number" min="2000" max="48000" value="24000"></label></div>
+      </fieldset>
+      <div class="form-actions"><button type="submit" id="analyze-button">开始分析</button><span id="run-status" role="status" aria-live="polite">准备上传日志</span></div>
+      <p id="error-message" class="error" role="alert" hidden></p>
+    </form>
+    <section id="results" hidden>
+      <div class="result-heading"><h2>02 / 分析结果</h2><div><button id="export-json" class="secondary">导出 JSON</button><button id="export-markdown" class="secondary">导出 Markdown</button></div></div>
+      <div class="metrics-grid" id="metrics"></div>
+      <section class="panel"><h3>诊断结论</h3><p id="conclusion-summary"></p><p id="coverage-note" class="hint"></p><ul id="limitations"></ul><p id="usage-note" class="hint"></p></section>
+      <section class="panel waveform-panel"><div class="section-heading"><h3>关键波形</h3><label class="inline-label">通道<select id="signal-channel"></select></label></div>
+        <div class="window-controls"><label>开始时间（s）<input id="window-start" type="number" step="any"></label><label>结束时间（s）<input id="window-end" type="number" step="any"></label><button id="inspect-window" class="secondary">查看窗口</button><button id="reset-window" class="secondary">完整时间范围</button></div>
+        <canvas id="waveform" height="270" aria-label="所选通道波形；采样数据及事件详情见下方表格" role="img"></canvas><p id="waveform-note" class="hint"></p>
+        <details><summary>查看本窗口采样数据</summary><div class="table-scroll"><table><thead><tr><th>时间（s）</th><th id="sample-value-heading">读数</th><th>CSV 行</th></tr></thead><tbody id="sample-rows"></tbody></table></div></details>
+      </section>
+      <section class="panel"><div class="section-heading"><h3>保护与数据质量事件</h3><span id="events-total" class="muted"></span></div><p class="hint">点击“查看”定位对应事件窗口。每页最多显示 100 个事件；导出保留完整分析结果。</p>
+        <div class="table-scroll"><table><thead><tr><th>证据</th><th>类型 / 通道</th><th>开始 / 确认 / 恢复（s）</th><th>状态</th><th>极值</th><th>操作</th></tr></thead><tbody id="event-rows"></tbody></table></div>
+        <div class="pagination"><button id="previous-page" class="secondary">上一页</button><span id="page-status"></span><button id="next-page" class="secondary">下一页</button></div><div id="event-details" class="event-detail" hidden></div>
+      </section>
+    </section>
+    <footer>可复核证据，而不是无依据的结论。所有阈值仅作软件演示。</footer>
+  </main>
+</body>
+</html>

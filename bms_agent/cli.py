@@ -44,6 +44,7 @@ def _offline(toolbox: Toolbox) -> dict:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # Windows redirected output otherwise follows the legacy code page, corrupting Chinese text.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")
@@ -64,6 +65,7 @@ def main(argv: list[str] | None = None) -> int:
         if not model_id.strip():
             print("请用 --model 指定自己有权限调用的模型，或设置 OPENAI_MODEL。", file=sys.stderr)
             return 2
+        # Delay credential prompting until all local inputs are validated below.
     try:
         mapping = json.loads(args.mapping.read_text(encoding="utf-8")) if args.mapping else {}
         if not isinstance(mapping, dict) or set(mapping) - {"column_map", "units"}:
@@ -113,10 +115,12 @@ def main(argv: list[str] | None = None) -> int:
             outcome = _offline(toolbox)
         else:
             from .runtime import run_agent
+
             outcome = asyncio.run(run_agent(toolbox, question, model_id, key, args.max_turns, args.timeout, args.max_output_tokens,
                                            max_total_tokens=args.max_total_tokens, resume_state=resume))
         payload.update(outcome)
     except (Exception, KeyboardInterrupt, asyncio.CancelledError) as exc:
+        # Provider errors can embed request material. Expose only class and fixed guidance.
         payload.update(status="failed", **failure_details(exc))
         return_code = 1
     payload["tool_calls"] = toolbox.calls

@@ -58,6 +58,8 @@ def make_toolbox(dataset: domain.Dataset, rules: list[domain.Rule], quality: Any
 def offline_analysis(toolbox: Toolbox) -> dict:
     for name in ("summarize_log", "list_protection_rules", "detect_faults"):
         toolbox.invoke(name)
+    # A local rule report has direct access to all computed events. This is not
+    # a claim that a model fetched every paginated item.
     events = toolbox.analysis["events"]
     toolbox.issued_evidence.update({event["evidence_id"]: event for event in events})
     proposal = {"summary": "", "coverage": "full", "limitations": [],
@@ -130,6 +132,7 @@ def analyze_request(payload: dict) -> dict:
         from .run_control import failure_details
         report.update(status="failed", **failure_details(exc))
     report["tool_calls"] = toolbox.calls
+    # Waveforms are deterministic UI inspection, not another paid model turn.
     waveform = toolbox._window(dataset.samples[0].timestamp_s, dataset.samples[-1].timestamp_s, 50)
     report = redact(report, (key,))
     return {"report": report, "waveform": waveform, "report_markdown": markdown_report(report)}

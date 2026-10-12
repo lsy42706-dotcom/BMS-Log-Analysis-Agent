@@ -1,24 +1,23 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "bms-log-agent"
-version = "0.1.0"
-description = "BMS log analysis agent with deterministic rules and bounded model tools"
-requires-python = ">=3.11"
-dependencies = [
-    "openai>=1.0",
-    "agents>=0.0.5",
-]
+version = "0.2.0"
+description = "BYOK BMS log analysis agent with evidence-backed local tools"
+requires-python = ">=3.10"
+dependencies = []
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7.0",
-]
+agent = ["openai-agents==0.23.1"]
 
 [project.scripts]
-bms-agent = "bms_agent.cli:main"
-
-[build-system]
-requires = ["setuptools>=68"]
-build-backend = "setuptools.build_meta"
+bms-log-agent = "bms_agent.cli:main"
+bms-log-web = "bms_agent.web:main"
 
 [tool.setuptools.packages.find]
 include = ["bms_agent*"]
+
+[tool.setuptools.package-data]
+bms_agent = ["web_assets/*"]

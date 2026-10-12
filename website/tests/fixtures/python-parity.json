@@ -1,0 +1,4827 @@
+{
+  "normal-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 7.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 9,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "normal.csv",
+      "sha256": "58cbcce8d5cfb1f28ae2ea206f3102326d09e07358a5bee12a44cfa0c743a21a",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 8,
+        "start_s": 0.0,
+        "end_s": 7.0,
+        "duration_s": 7.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 10.0,
+            "mean": 10.0
+          },
+          "temperature_c": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 8,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 10.0,
+              "mean": 10.0
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 0,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": []
+    }
+  },
+  "current-inclusive-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "current_boundary.csv",
+      "sha256": "fe47cf213a58f0d20a75f29084a224a21a86257a25bea3004ecc54d013942ad2",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 7,
+        "start_s": 0.0,
+        "end_s": 6.0,
+        "duration_s": 6.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 50.0,
+            "mean": 42.142857142857146
+          },
+          "temperature_c": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 7,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 50.0,
+              "mean": 42.142857142857146
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "OVERCURRENT",
+          "rule_id": "overcurrent",
+          "field": "current_a",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": 50.0,
+          "peak_value": 50.0,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "undervoltage-inclusive-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.0,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.0,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.0,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.2,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.2,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.2,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "voltage_low_boundary.csv",
+      "sha256": "e4fb71dcfa33f3e61b10c5994b54ac12f7e62da5d4fd6f9538c4beebb8aad49d",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 7,
+        "start_s": 0.0,
+        "end_s": 6.0,
+        "duration_s": 6.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 3.0,
+            "max": 3.7,
+            "mean": 3.185714285714286
+          },
+          "current_a": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 10.0,
+            "mean": 10.0
+          },
+          "temperature_c": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 7,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 3.0,
+              "max": 3.7,
+              "mean": 3.185714285714286
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 10.0,
+              "mean": 10.0
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "UNDERVOLTAGE",
+          "rule_id": "undervoltage",
+          "field": "cell_voltage_v",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": 3.0,
+          "peak_value": 3.0,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": "legacy_cell",
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "overvoltage-inclusive-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 4.25,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 4.25,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 4.25,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 4.15,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 4.15,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 4.15,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "voltage_high_boundary.csv",
+      "sha256": "8d57a93d8f7d4c8dc0b967cb825721144ba2d1f0309a45ff570461f98e80afd7",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 7,
+        "start_s": 0.0,
+        "end_s": 6.0,
+        "duration_s": 6.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 4.25,
+            "mean": 4.128571428571429
+          },
+          "current_a": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 10.0,
+            "mean": 10.0
+          },
+          "temperature_c": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 7,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 4.25,
+              "mean": 4.128571428571429
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 10.0,
+              "mean": 10.0
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "OVERVOLTAGE",
+          "rule_id": "overvoltage",
+          "field": "cell_voltage_v",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": 4.25,
+          "peak_value": 4.25,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": "legacy_cell",
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "temperature-inclusive-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 60.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 60.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 60.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 60.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 55.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 55.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 7.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 55.0,
+          "row_number": 9,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "temperature_boundary.csv",
+      "sha256": "93b5560630c0b31a272b1b273278f9b7e675c2b8bb4d983a687c3a73e8509a1a",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 8,
+        "start_s": 0.0,
+        "end_s": 7.0,
+        "duration_s": 7.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 10.0,
+            "mean": 10.0
+          },
+          "temperature_c": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 60.0,
+            "mean": 53.75
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 8,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 10.0,
+              "mean": 10.0
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 60.0,
+              "mean": 53.75
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "OVERTEMPERATURE",
+          "rule_id": "overtemperature",
+          "field": "temperature_c",
+          "start_s": 1.0,
+          "confirmed_s": 4.0,
+          "recovered_s": 7.0,
+          "status": "recovered",
+          "trigger_value": 60.0,
+          "peak_value": 60.0,
+          "row_start": 3,
+          "row_confirm": 6,
+          "row_recover": 9,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": "legacy_probe"
+        }
+      ]
+    }
+  },
+  "strictly-below-boundaries-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.01,
+          "current_a": 49.99,
+          "temperature_c": 59.99,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.01,
+          "current_a": 49.99,
+          "temperature_c": 59.99,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 4.249,
+          "current_a": 49.99,
+          "temperature_c": 59.99,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 4.249,
+          "current_a": 49.99,
+          "temperature_c": 59.99,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.01,
+          "current_a": 49.99,
+          "temperature_c": 59.99,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.01,
+          "current_a": 49.99,
+          "temperature_c": 59.99,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "below_boundary.csv",
+      "sha256": "a9ce619a88346f9190a74442fd30ca65a12ae132930dbea884174e1093e408e7",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 6,
+        "start_s": 0.0,
+        "end_s": 5.0,
+        "duration_s": 5.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 6,
+            "invalid_count": 0,
+            "min": 3.01,
+            "max": 4.249,
+            "mean": 3.4229999999999996
+          },
+          "current_a": {
+            "valid_count": 6,
+            "invalid_count": 0,
+            "min": 49.99,
+            "max": 49.99,
+            "mean": 49.99
+          },
+          "temperature_c": {
+            "valid_count": 6,
+            "invalid_count": 0,
+            "min": 59.99,
+            "max": 59.99,
+            "mean": 59.99
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 6,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 6,
+              "invalid_count": 0,
+              "min": 3.01,
+              "max": 4.249,
+              "mean": 3.4229999999999996
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 6,
+              "invalid_count": 0,
+              "min": 49.99,
+              "max": 49.99,
+              "mean": 49.99
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 6,
+              "invalid_count": 0,
+              "min": 59.99,
+              "max": 59.99,
+              "mean": 59.99
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 0,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": []
+    }
+  },
+  "missing-interrupts-timers-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": null,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 7.0,
+          "cell_voltage_v": 3.7,
+          "current_a": null,
+          "temperature_c": 25.0,
+          "row_number": 9,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 8.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 10,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 9.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 11,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 10.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 12,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [
+        {
+          "code": "SENSOR_INVALID",
+          "row_number": 4,
+          "timestamp_s": 2.0,
+          "field": "current_a",
+          "message": "Row 4: current_a is missing, nonnumeric, or nonfinite."
+        },
+        {
+          "code": "SENSOR_INVALID",
+          "row_number": 9,
+          "timestamp_s": 7.0,
+          "field": "current_a",
+          "message": "Row 9: current_a is missing, nonnumeric, or nonfinite."
+        }
+      ],
+      "source_name": "missing_timer.csv",
+      "sha256": "ca3b55f01bf7149edab92a8698227ee48e89820f80f26772b914c9cf1e9048c2",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 11,
+        "start_s": 0.0,
+        "end_s": 10.0,
+        "duration_s": 10.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 11,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 9,
+            "invalid_count": 2,
+            "min": 10.0,
+            "max": 50.0,
+            "mean": 43.333333333333336
+          },
+          "temperature_c": {
+            "valid_count": 11,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 9,
+          "idle": 0,
+          "unknown": 2
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 11,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 9,
+              "invalid_count": 2,
+              "min": 10.0,
+              "max": 50.0,
+              "mean": 43.333333333333336
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 11,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 2,
+        "quality_event_count": 2,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "SENSOR_INVALID",
+          "rule_id": "sensor_current_a",
+          "field": "current_a",
+          "start_s": 2.0,
+          "confirmed_s": 2.0,
+          "recovered_s": 3.0,
+          "status": "recovered",
+          "trigger_value": null,
+          "peak_value": null,
+          "row_start": 4,
+          "row_confirm": 4,
+          "row_recover": 5,
+          "severity": "warning",
+          "message": "Missing, nonnumeric, or nonfinite sensor readings interrupt protection timing.",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "OVERCURRENT",
+          "rule_id": "overcurrent",
+          "field": "current_a",
+          "start_s": 3.0,
+          "confirmed_s": 5.0,
+          "recovered_s": 10.0,
+          "status": "recovered",
+          "trigger_value": 50.0,
+          "peak_value": 50.0,
+          "row_start": 5,
+          "row_confirm": 7,
+          "row_recover": 12,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E002",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "SENSOR_INVALID",
+          "rule_id": "sensor_current_a",
+          "field": "current_a",
+          "start_s": 7.0,
+          "confirmed_s": 7.0,
+          "recovered_s": 8.0,
+          "status": "recovered",
+          "trigger_value": null,
+          "peak_value": null,
+          "row_start": 9,
+          "row_confirm": 9,
+          "row_recover": 10,
+          "severity": "warning",
+          "message": "Missing, nonnumeric, or nonfinite sensor readings interrupt protection timing.",
+          "evidence_id": "E003",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "gap-interrupts-timers-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 7.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 8.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 12.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 13.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 9,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 14.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 10,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "gap_timer.csv",
+      "sha256": "20155d4c4b64453b035ddf69ca58823f06ee971c0380249c5ac6caf9502bca2e",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 9,
+        "start_s": 0.0,
+        "end_s": 14.0,
+        "duration_s": 14.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 9,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 9,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 50.0,
+            "mean": 43.333333333333336
+          },
+          "temperature_c": {
+            "valid_count": 9,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 9,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 9,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 9,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 50.0,
+              "mean": 43.333333333333336
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 9,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 2,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "SAMPLE_GAP",
+          "rule_id": "sample_gap",
+          "field": "timestamp_s",
+          "start_s": 1.0,
+          "confirmed_s": 5.0,
+          "recovered_s": 5.0,
+          "status": "recovered",
+          "trigger_value": 4.0,
+          "peak_value": 4.0,
+          "row_start": 3,
+          "row_confirm": 4,
+          "row_recover": 4,
+          "severity": "warning",
+          "message": "Sampling interval exceeds a rule limit; continuous fault or recovery is not inferred across this gap.",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "OVERCURRENT",
+          "rule_id": "overcurrent",
+          "field": "current_a",
+          "start_s": 5.0,
+          "confirmed_s": 7.0,
+          "recovered_s": 14.0,
+          "status": "recovered",
+          "trigger_value": 50.0,
+          "peak_value": 50.0,
+          "row_start": 4,
+          "row_confirm": 6,
+          "row_recover": 10,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E002",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "SAMPLE_GAP",
+          "rule_id": "sample_gap",
+          "field": "timestamp_s",
+          "start_s": 8.0,
+          "confirmed_s": 12.0,
+          "recovered_s": 12.0,
+          "status": "recovered",
+          "trigger_value": 4.0,
+          "peak_value": 4.0,
+          "row_start": 7,
+          "row_confirm": 8,
+          "row_recover": 8,
+          "severity": "warning",
+          "message": "Sampling interval exceeds a rule limit; continuous fault or recovery is not inferred across this gap.",
+          "evidence_id": "E003",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "same-code-two-episodes-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 55.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 51.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 7.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 9,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 8.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 10,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 9.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 11,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 10.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 12,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 11.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 13,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 12.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 14,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "two_current_events.csv",
+      "sha256": "b7ea82720a11bbec000fab8517c53a9158d54ec03cbf44665327ee79481bdace",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 13,
+        "start_s": 0.0,
+        "end_s": 12.0,
+        "duration_s": 12.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 13,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 13,
+            "invalid_count": 0,
+            "min": -50.0,
+            "max": 55.0,
+            "mean": 1.2307692307692308
+          },
+          "temperature_c": {
+            "valid_count": 13,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 6,
+          "discharge": 7,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 13,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 13,
+              "invalid_count": 0,
+              "min": -50.0,
+              "max": 55.0,
+              "mean": 1.2307692307692308
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 13,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 2,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "OVERCURRENT",
+          "rule_id": "overcurrent",
+          "field": "current_a",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": 50.0,
+          "peak_value": 55.0,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "OVERCURRENT",
+          "rule_id": "overcurrent",
+          "field": "current_a",
+          "start_s": 7.0,
+          "confirmed_s": 9.0,
+          "recovered_s": 12.0,
+          "status": "recovered",
+          "trigger_value": -50.0,
+          "peak_value": -50.0,
+          "row_start": 9,
+          "row_confirm": 11,
+          "row_recover": 14,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E002",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "negative-charge-convention-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "negative_current.csv",
+      "sha256": "a91fa7a0ab65ee6da3e948dc497c5bb4c4c251f825eff21db572b5e47e6ea245",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 7,
+        "start_s": 0.0,
+        "end_s": 6.0,
+        "duration_s": 6.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": -50.0,
+            "max": 10.0,
+            "mean": -39.285714285714285
+          },
+          "temperature_c": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 6,
+          "discharge": 1,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": -50.0,
+              "max": 10.0,
+              "mean": -39.285714285714285
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "charge_current",
+          "code": "CHARGE_OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "charge"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "CHARGE_OVERCURRENT",
+          "rule_id": "charge_current",
+          "field": "current_a",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": -50.0,
+          "peak_value": -50.0,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "charge",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "negative-discharge-convention-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "negative_current.csv",
+      "sha256": "a91fa7a0ab65ee6da3e948dc497c5bb4c4c251f825eff21db572b5e47e6ea245",
+      "pack_id": "pack_1",
+      "current_convention": "positive_charge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 7,
+        "start_s": 0.0,
+        "end_s": 6.0,
+        "duration_s": 6.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": -50.0,
+            "max": 10.0,
+            "mean": -39.285714285714285
+          },
+          "temperature_c": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_charge",
+        "phase_sample_counts": {
+          "charge": 1,
+          "discharge": 6,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": -50.0,
+              "max": 10.0,
+              "mean": -39.285714285714285
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "discharge_current",
+          "code": "DISCHARGE_OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "discharge"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "DISCHARGE_OVERCURRENT",
+          "rule_id": "discharge_current",
+          "field": "current_a",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": -50.0,
+          "peak_value": -50.0,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "discharge",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "multi-cell-probe-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 2,
+          "cell_voltages_v": {
+            "c1": 3.7,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 25.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 3,
+          "cell_voltages_v": {
+            "c1": 3.0,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 60.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 4,
+          "cell_voltages_v": {
+            "c1": 2.9,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 61.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 5,
+          "cell_voltages_v": {
+            "c1": 3.0,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 60.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 6,
+          "cell_voltages_v": {
+            "c1": 3.2,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 60.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 7,
+          "cell_voltages_v": {
+            "c1": 3.2,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 55.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 8,
+          "cell_voltages_v": {
+            "c1": 3.2,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 55.0,
+            "t2": 25.0
+          }
+        },
+        {
+          "timestamp_s": 7.0,
+          "cell_voltage_v": null,
+          "current_a": 10.0,
+          "temperature_c": null,
+          "row_number": 9,
+          "cell_voltages_v": {
+            "c1": 3.2,
+            "c2": 3.8
+          },
+          "temperatures_c": {
+            "t1": 55.0,
+            "t2": 25.0
+          }
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "wide_channels.csv",
+      "sha256": "d5908831b125b3cc25235613ea6f1d512e42cb4f26b3ac3f58a7db8b309ab5de",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v_c1",
+          "cell_voltage_v_c2",
+          "current_a",
+          "temperature_c_t1",
+          "temperature_c_t2"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v_c1": "cell_voltage_v_c1",
+          "cell_voltage_v_c2": "cell_voltage_v_c2",
+          "current_a": "current_a",
+          "temperature_c_t1": "temperature_c_t1",
+          "temperature_c_t2": "temperature_c_t2"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v_c1": "V",
+          "cell_voltage_v_c2": "V",
+          "current_a": "A",
+          "temperature_c_t1": "degC",
+          "temperature_c_t2": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 8,
+        "start_s": 0.0,
+        "end_s": 7.0,
+        "duration_s": 7.0,
+        "stats": {
+          "cell_voltage_v_c1": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 2.9,
+            "max": 3.7,
+            "mean": 3.1750000000000003
+          },
+          "cell_voltage_v_c2": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 3.8,
+            "max": 3.8,
+            "mean": 3.8
+          },
+          "current_a": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 10.0,
+            "mean": 10.0
+          },
+          "temperature_c_t1": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 61.0,
+            "mean": 53.875
+          },
+          "temperature_c_t2": {
+            "valid_count": 8,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 8,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v_c1": {
+            "field": "cell_voltage_v_c1",
+            "kind": "cell_voltage_v",
+            "channel_id": "c1",
+            "cell_id": "c1",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 2.9,
+              "max": 3.7,
+              "mean": 3.1750000000000003
+            }
+          },
+          "cell_voltage_v_c2": {
+            "field": "cell_voltage_v_c2",
+            "kind": "cell_voltage_v",
+            "channel_id": "c2",
+            "cell_id": "c2",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 3.8,
+              "max": 3.8,
+              "mean": 3.8
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 10.0,
+              "mean": 10.0
+            }
+          },
+          "temperature_c_t1": {
+            "field": "temperature_c_t1",
+            "kind": "temperature_c",
+            "channel_id": "t1",
+            "cell_id": null,
+            "probe_id": "t1",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 61.0,
+              "mean": 53.875
+            }
+          },
+          "temperature_c_t2": {
+            "field": "temperature_c_t2",
+            "kind": "temperature_c",
+            "channel_id": "t2",
+            "cell_id": null,
+            "probe_id": "t2",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 8,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 2,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "UNDERVOLTAGE",
+          "rule_id": "undervoltage",
+          "field": "cell_voltage_v_c1",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": 6.0,
+          "status": "recovered",
+          "trigger_value": 3.0,
+          "peak_value": 2.9,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": 8,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": "c1",
+          "cell_id": "c1",
+          "probe_id": null
+        },
+        {
+          "code": "OVERTEMPERATURE",
+          "rule_id": "overtemperature",
+          "field": "temperature_c_t1",
+          "start_s": 1.0,
+          "confirmed_s": 4.0,
+          "recovered_s": 7.0,
+          "status": "recovered",
+          "trigger_value": 60.0,
+          "peak_value": 61.0,
+          "row_start": 3,
+          "row_confirm": 6,
+          "row_recover": 9,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E002",
+          "pack_id": "pack_1",
+          "channel_id": "t1",
+          "cell_id": null,
+          "probe_id": "t1"
+        }
+      ]
+    }
+  },
+  "active-current-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 55.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 51.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "active_current.csv",
+      "sha256": "5dfb32afbd4ccc690f392276c764c1010bceed0e23316db8127b18cf760ddd0f",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 4,
+        "start_s": 0.0,
+        "end_s": 3.0,
+        "duration_s": 3.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 4,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 4,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 55.0,
+            "mean": 41.5
+          },
+          "temperature_c": {
+            "valid_count": 4,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 4,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 4,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 4,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 55.0,
+              "mean": 41.5
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 4,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 1,
+        "active_fault_count": 1
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "OVERCURRENT",
+          "rule_id": "overcurrent",
+          "field": "current_a",
+          "start_s": 1.0,
+          "confirmed_s": 3.0,
+          "recovered_s": null,
+          "status": "active",
+          "trigger_value": 50.0,
+          "peak_value": 55.0,
+          "row_start": 3,
+          "row_confirm": 5,
+          "row_recover": null,
+          "severity": "error",
+          "message": "Demonstration protection rule confirmed by sampled elapsed time; not hardware validation.",
+          "current_mode": "any",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "pending-not-confirmed-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 50.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "pending_current.csv",
+      "sha256": "2371fc69fa54691ffd11e82107a4cd29f7bfbb7c84b7aea2c6df9382c8798cbd",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 3,
+        "start_s": 0.0,
+        "end_s": 2.0,
+        "duration_s": 2.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 3,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 3,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 50.0,
+            "mean": 36.666666666666664
+          },
+          "temperature_c": {
+            "valid_count": 3,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 3,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 3,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 3,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 50.0,
+              "mean": 36.666666666666664
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 3,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 0,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": []
+    }
+  },
+  "opposite-current-mode-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -50.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 6.0,
+          "cell_voltage_v": 3.7,
+          "current_a": -45.0,
+          "temperature_c": 25.0,
+          "row_number": 8,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "negative_current.csv",
+      "sha256": "a91fa7a0ab65ee6da3e948dc497c5bb4c4c251f825eff21db572b5e47e6ea245",
+      "pack_id": "pack_1",
+      "current_convention": "positive_charge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 7,
+        "start_s": 0.0,
+        "end_s": 6.0,
+        "duration_s": 6.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": -50.0,
+            "max": 10.0,
+            "mean": -39.285714285714285
+          },
+          "temperature_c": {
+            "valid_count": 7,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_charge",
+        "phase_sample_counts": {
+          "charge": 1,
+          "discharge": 6,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": -50.0,
+              "max": 10.0,
+              "mean": -39.285714285714285
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 7,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 0,
+        "fault_event_count": 0,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "charge_current",
+          "code": "CHARGE_OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "charge"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": []
+    }
+  },
+  "quality-heuristics-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 3.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 11.0,
+          "temperature_c": 25.0,
+          "row_number": 5,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 4.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 90.0,
+          "temperature_c": 25.0,
+          "row_number": 6,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 5.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 7,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [],
+      "source_name": "quality_heuristics.csv",
+      "sha256": "d2330f7eb303d9e6ab7c232607594f5ca41164f1542e90cd36ed43fa6c7487a7",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 6,
+        "start_s": 0.0,
+        "end_s": 5.0,
+        "duration_s": 5.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 6,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 6,
+            "invalid_count": 0,
+            "min": 10.0,
+            "max": 90.0,
+            "mean": 23.5
+          },
+          "temperature_c": {
+            "valid_count": 6,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 6,
+          "idle": 0,
+          "unknown": 0
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 6,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 6,
+              "invalid_count": 0,
+              "min": 10.0,
+              "max": 90.0,
+              "mean": 23.5
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 6,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 0,
+        "quality_event_count": 4,
+        "fault_event_count": 0,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {
+          "current_a": [
+            -60.0,
+            60.0
+          ]
+        },
+        "stuck_s": {
+          "current_a": 2.0
+        },
+        "stuck_epsilon": {},
+        "max_rate": {
+          "current_a": 20.0
+        },
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "SENSOR_STUCK",
+          "rule_id": "quality_stuck",
+          "field": "current_a",
+          "start_s": 0.0,
+          "confirmed_s": 2.0,
+          "recovered_s": 3.0,
+          "status": "recovered",
+          "trigger_value": 10.0,
+          "peak_value": 10.0,
+          "row_start": 2,
+          "row_confirm": 4,
+          "row_recover": 5,
+          "severity": "warning",
+          "message": "Low-variation run exceeded a configured duration; stable real conditions can produce the same pattern.",
+          "epsilon": 0.0,
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "SENSOR_SPIKE",
+          "rule_id": "quality_spike",
+          "field": "current_a",
+          "start_s": 3.0,
+          "confirmed_s": 4.0,
+          "recovered_s": 4.0,
+          "status": "recovered",
+          "trigger_value": 90.0,
+          "peak_value": 90.0,
+          "row_start": 5,
+          "row_confirm": 6,
+          "row_recover": 6,
+          "severity": "warning",
+          "message": "Observed sample-to-sample rate exceeded a configured limit; no interpolated waveform is inferred.",
+          "rate_per_s": 79.0,
+          "rate_exceeds_numeric_range": false,
+          "evidence_id": "E002",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "SENSOR_IMPLAUSIBLE",
+          "rule_id": "quality_bounds",
+          "field": "current_a",
+          "start_s": 4.0,
+          "confirmed_s": 4.0,
+          "recovered_s": 5.0,
+          "status": "recovered",
+          "trigger_value": 90.0,
+          "peak_value": 90.0,
+          "row_start": 6,
+          "row_confirm": 6,
+          "row_recover": 7,
+          "severity": "warning",
+          "message": "Reading is outside user-configured plausibility bounds; not a validated physical fault.",
+          "evidence_id": "E003",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        },
+        {
+          "code": "SENSOR_SPIKE",
+          "rule_id": "quality_spike",
+          "field": "current_a",
+          "start_s": 4.0,
+          "confirmed_s": 5.0,
+          "recovered_s": 5.0,
+          "status": "recovered",
+          "trigger_value": 10.0,
+          "peak_value": 10.0,
+          "row_start": 6,
+          "row_confirm": 7,
+          "row_recover": 7,
+          "severity": "warning",
+          "message": "Observed sample-to-sample rate exceeded a configured limit; no interpolated waveform is inferred.",
+          "rate_per_s": 80.0,
+          "rate_exceeds_numeric_range": false,
+          "evidence_id": "E004",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  },
+  "prompt-like-cell-v1": {
+    "dataset": {
+      "samples": [
+        {
+          "timestamp_s": 0.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 2,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 1.0,
+          "cell_voltage_v": 3.7,
+          "current_a": null,
+          "temperature_c": 25.0,
+          "row_number": 3,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        },
+        {
+          "timestamp_s": 2.0,
+          "cell_voltage_v": 3.7,
+          "current_a": 10.0,
+          "temperature_c": 25.0,
+          "row_number": 4,
+          "cell_voltages_v": {},
+          "temperatures_c": {}
+        }
+      ],
+      "quality_issues": [
+        {
+          "code": "SENSOR_INVALID",
+          "row_number": 3,
+          "timestamp_s": 1.0,
+          "field": "current_a",
+          "message": "Row 3: current_a is missing, nonnumeric, or nonfinite."
+        }
+      ],
+      "source_name": "prompt_like_cell.csv",
+      "sha256": "4cbdc1f69ed79131d1a9a1ee93e64d2cfc29ee887a5ed69966053551a4a4e3cf",
+      "pack_id": "pack_1",
+      "current_convention": "positive_discharge",
+      "import_metadata": {
+        "schema_version": 2,
+        "channels": [
+          "cell_voltage_v",
+          "current_a",
+          "temperature_c"
+        ],
+        "column_map": {
+          "timestamp_s": "timestamp_s",
+          "cell_voltage_v": "cell_voltage_v",
+          "current_a": "current_a",
+          "temperature_c": "temperature_c"
+        },
+        "source_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        },
+        "normalized_units": {
+          "timestamp_s": "s",
+          "cell_voltage_v": "V",
+          "current_a": "A",
+          "temperature_c": "degC"
+        }
+      }
+    },
+    "analysis": {
+      "summary": {
+        "sample_count": 3,
+        "start_s": 0.0,
+        "end_s": 2.0,
+        "duration_s": 2.0,
+        "stats": {
+          "cell_voltage_v": {
+            "valid_count": 3,
+            "invalid_count": 0,
+            "min": 3.7,
+            "max": 3.7,
+            "mean": 3.7
+          },
+          "current_a": {
+            "valid_count": 2,
+            "invalid_count": 1,
+            "min": 10.0,
+            "max": 10.0,
+            "mean": 10.0
+          },
+          "temperature_c": {
+            "valid_count": 3,
+            "invalid_count": 0,
+            "min": 25.0,
+            "max": 25.0,
+            "mean": 25.0
+          }
+        },
+        "pack_id": "pack_1",
+        "current_convention": "positive_discharge",
+        "phase_sample_counts": {
+          "charge": 0,
+          "discharge": 2,
+          "idle": 0,
+          "unknown": 1
+        },
+        "channels": {
+          "cell_voltage_v": {
+            "field": "cell_voltage_v",
+            "kind": "cell_voltage_v",
+            "channel_id": null,
+            "cell_id": "legacy_cell",
+            "probe_id": null,
+            "unit": "V",
+            "stats": {
+              "valid_count": 3,
+              "invalid_count": 0,
+              "min": 3.7,
+              "max": 3.7,
+              "mean": 3.7
+            }
+          },
+          "current_a": {
+            "field": "current_a",
+            "kind": "current_a",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": null,
+            "unit": "A",
+            "stats": {
+              "valid_count": 2,
+              "invalid_count": 1,
+              "min": 10.0,
+              "max": 10.0,
+              "mean": 10.0
+            }
+          },
+          "temperature_c": {
+            "field": "temperature_c",
+            "kind": "temperature_c",
+            "channel_id": null,
+            "cell_id": null,
+            "probe_id": "legacy_probe",
+            "unit": "degC",
+            "stats": {
+              "valid_count": 3,
+              "invalid_count": 0,
+              "min": 25.0,
+              "max": 25.0,
+              "mean": 25.0
+            }
+          }
+        },
+        "not_evaluated_rules": [],
+        "quality_issue_count": 1,
+        "quality_event_count": 1,
+        "fault_event_count": 0,
+        "active_fault_count": 0
+      },
+      "rules": [
+        {
+          "rule_id": "overcurrent",
+          "code": "OVERCURRENT",
+          "field": "current_a",
+          "direction": "abs_high",
+          "threshold": 50.0,
+          "recovery_threshold": 45.0,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overtemperature",
+          "code": "OVERTEMPERATURE",
+          "field": "temperature_c",
+          "direction": "high",
+          "threshold": 60.0,
+          "recovery_threshold": 55.0,
+          "confirm_s": 3.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "undervoltage",
+          "code": "UNDERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "low",
+          "threshold": 3.0,
+          "recovery_threshold": 3.2,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        },
+        {
+          "rule_id": "overvoltage",
+          "code": "OVERVOLTAGE",
+          "field": "cell_voltage_v",
+          "direction": "high",
+          "threshold": 4.25,
+          "recovery_threshold": 4.15,
+          "confirm_s": 2.0,
+          "recovery_s": 2.0,
+          "max_gap_s": 2.0,
+          "channel_id": null,
+          "current_mode": "any"
+        }
+      ],
+      "quality_configuration": {
+        "bounds": {},
+        "stuck_s": {},
+        "stuck_epsilon": {},
+        "max_rate": {},
+        "max_gap_s": 2.0
+      },
+      "events": [
+        {
+          "code": "SENSOR_INVALID",
+          "rule_id": "sensor_current_a",
+          "field": "current_a",
+          "start_s": 1.0,
+          "confirmed_s": 1.0,
+          "recovered_s": 2.0,
+          "status": "recovered",
+          "trigger_value": null,
+          "peak_value": null,
+          "row_start": 3,
+          "row_confirm": 3,
+          "row_recover": 4,
+          "severity": "warning",
+          "message": "Missing, nonnumeric, or nonfinite sensor readings interrupt protection timing.",
+          "evidence_id": "E001",
+          "pack_id": "pack_1",
+          "channel_id": null,
+          "cell_id": null,
+          "probe_id": null
+        }
+      ]
+    }
+  }
+}

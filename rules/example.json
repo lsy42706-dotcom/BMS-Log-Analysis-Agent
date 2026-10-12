@@ -1,0 +1,48 @@
+{
+  "rules": [
+    {
+      "rule_id": "overcurrent",
+      "code": "OVERCURRENT",
+      "field": "current_a",
+      "direction": "abs_high",
+      "threshold": 50.0,
+      "recovery_threshold": 45.0,
+      "confirm_s": 2.0,
+      "recovery_s": 2.0,
+      "max_gap_s": 2.0
+    },
+    {
+      "rule_id": "overtemperature",
+      "code": "OVERTEMPERATURE",
+      "field": "temperature_c",
+      "direction": "high",
+      "threshold": 60.0,
+      "recovery_threshold": 55.0,
+      "confirm_s": 3.0,
+      "recovery_s": 2.0,
+      "max_gap_s": 2.0
+    },
+    {
+      "rule_id": "undervoltage",
+      "code": "UNDERVOLTAGE",
+      "field": "cell_voltage_v",
+      "direction": "low",
+      "threshold": 3.0,
+      "recovery_threshold": 3.2,
+      "confirm_s": 2.0,
+      "recovery_s": 2.0,
+      "max_gap_s": 2.0
+    },
+    {
+      "rule_id": "overvoltage",
+      "code": "OVERVOLTAGE",
+      "field": "cell_voltage_v",
+      "direction": "high",
+      "threshold": 4.25,
+      "recovery_threshold": 4.15,
+      "confirm_s": 2.0,
+      "recovery_s": 2.0,
+      "max_gap_s": 2.0
+    }
+  ]
+}

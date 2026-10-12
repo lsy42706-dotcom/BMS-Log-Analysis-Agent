@@ -74,6 +74,13 @@ class Rule:
 
 @dataclass(frozen=True)
 class QualityConfig:
+    """Opt-in diagnostic heuristics, not proof of a physical sensor failure.
+
+    Maps use a generic sensor field or a canonical channel name. Channel-specific
+    values override generic values. Bounds retain measurements as evidence;
+    they do not silently replace out-of-range readings or recalibrate them.
+    """
+
     bounds: dict[str, tuple[float, float]] = dataclass_field(default_factory=dict)
     stuck_s: dict[str, float] = dataclass_field(default_factory=dict)
     stuck_epsilon: dict[str, float] = dataclass_field(default_factory=dict)
@@ -82,6 +89,7 @@ class QualityConfig:
 
 
 def channel_metadata(field: str) -> dict:
+    """Return bounded identifiers for a canonical sensor field."""
     match = _CHANNEL.fullmatch(field)
     generic, channel_id = match.groups() if match else (field, None)
     return {
@@ -98,6 +106,7 @@ def _is_sensor_field(field: object) -> bool:
 
 
 def sample_readings(sample: Sample) -> dict[str, float | None]:
+    """Flatten actual scalar/wide sensor channels; no aggregate or invented alias."""
     readings = {"current_a": sample.current_a}
     if not sample.cell_voltages_v or sample.cell_voltage_v is not None:
         readings["cell_voltage_v"] = sample.cell_voltage_v
@@ -109,10 +118,12 @@ def sample_readings(sample: Sample) -> dict[str, float | None]:
 
 
 def sample_channels(sample: Sample) -> list[str]:
+    """Return canonical physical sensor names present in a sample."""
     return sorted(sample_readings(sample))
 
 
 def sensor_channels(dataset: Dataset) -> list[str]:
+    """Return configured physical sensor names, including entirely missing columns."""
     channels = set()
     for sample in dataset.samples:
         channels.update(sample_channels(sample))
@@ -143,6 +154,7 @@ def _reading(sample: Sample, field: str, channels: list[str] | None = None) -> f
 
 
 def default_rules() -> list[Rule]:
+    """Return demonstration thresholds; do not use as real battery calibration."""
     return [
         Rule("overcurrent", "OVERCURRENT", "current_a", "abs_high", 50.0, 45.0, 2.0, 2.0),
         Rule("overtemperature", "OVERTEMPERATURE", "temperature_c", "high", 60.0, 55.0, 3.0, 2.0),
@@ -161,9 +173,20 @@ def _number(value: object) -> float | None:
     return result if math.isfinite(result) else None
 
 
+def _quality_issue(row: int, timestamp: float, field: str) -> dict:
+    return {
+        "code": "SENSOR_INVALID",
+        "row_number": row,
+        "timestamp_s": timestamp,
+        "field": field,
+        "message": f"Row {row}: {field} is missing, nonnumeric, or nonfinite.",
+    }
+
+
 def load_csv(path: Path, column_map: dict[str, str] | None = None,
              units: dict[str, str] | None = None, *,
              current_convention: str = "positive_discharge", pack_id: str = "pack_1") -> Dataset:
+    """Import a bounded local CSV through the same parser used by uploaded bytes."""
     path = Path(path)
     try:
         if path.stat().st_size > MAX_BYTES:
@@ -179,7 +202,9 @@ def load_csv_bytes(content: bytes, source_name: str = "upload.csv",
                    column_map: dict[str, str] | None = None,
                    units: dict[str, str] | None = None, *,
                    current_convention: str = "positive_discharge", pack_id: str = "pack_1") -> Dataset:
+    """Import bytes without accessing paths; column_map is canonical -> source."""
     from .importer import parse_csv_bytes
+
     return parse_csv_bytes(content, source_name, column_map, units,
                            current_convention=current_convention, pack_id=pack_id)
 
@@ -239,6 +264,8 @@ def _load_profile_payload(path: Path) -> object:
         if Path(path).stat().st_size > 1024 * 1024:
             raise RulesError("Rule configuration exceeds the 1 MiB size limit.")
         content = Path(path).read_bytes()
+        if len(content) > 1024 * 1024:
+            raise RulesError("Rule configuration exceeds the 1 MiB size limit.")
         payload = json.loads(content.decode("utf-8-sig"))
     except OSError as exc:
         raise RulesError("Rule configuration could not be read.") from exc
@@ -281,9 +308,12 @@ def _validate_quality(config: QualityConfig | None) -> QualityConfig:
 
 
 def profile_from_dict(payload: object) -> tuple[list[Rule], QualityConfig]:
+    """Parse a JSON-compatible rules array/profile, keeping quality disabled by default."""
     if isinstance(payload, dict):
         if set(payload) - {"rules", "quality", "description"}:
             raise RulesError("Profile contains unsupported top-level fields.")
+        if "description" in payload and (not isinstance(payload["description"], str) or len(payload["description"]) > 1000):
+            raise RulesError("Profile description must be bounded text.")
     quality_payload = payload.get("quality", {}) if isinstance(payload, dict) else {}
     rules_payload = payload.get("rules") if isinstance(payload, dict) else payload
     if not isinstance(rules_payload, list) or not rules_payload or len(rules_payload) > 100:
@@ -306,12 +336,14 @@ def profile_from_dict(payload: object) -> tuple[list[Rule], QualityConfig]:
 
 
 def load_profile(path: Path | None = None) -> tuple[list[Rule], QualityConfig]:
+    """Load illustrative rules and optional diagnostic quality heuristics."""
     if path is None:
         return default_rules(), QualityConfig()
     return profile_from_dict(_load_profile_payload(path))
 
 
 def load_rules(path: Path | None = None) -> list[Rule]:
+    """Backward-compatible rule-only loader; callers opt into quality via load_profile."""
     if path is None:
         return default_rules()
     payload = _load_profile_payload(path)
@@ -344,6 +376,8 @@ def _validate_samples(dataset: Dataset) -> list[Sample]:
             raise DatasetError(f"Row {sample.row_number}: timestamp_s must strictly increase.")
         if first is None:
             first = timestamp
+        if not math.isfinite(timestamp - first):
+            raise DatasetError(f"Row {sample.row_number}: timestamp_s range is too large.")
         mappings = []
         for mapping in (sample.cell_voltages_v, sample.temperatures_c):
             if not isinstance(mapping, dict):
@@ -360,6 +394,9 @@ def _validate_samples(dataset: Dataset) -> list[Sample]:
             raise DatasetError("Dataset exceeds the 64-sensor-channel limit.")
         samples.append(normalized)
         previous = timestamp
+    if len(sensor_channels(Dataset(samples, [], dataset.source_name, dataset.sha256,
+                                   import_metadata=dataset.import_metadata))) > MAX_SENSOR_CHANNELS:
+        raise DatasetError("Dataset exceeds the 64-sensor-channel limit.")
     return samples
 
 
@@ -367,12 +404,20 @@ def _event(code: str, rule_id: str, field: str, start: Sample, confirmed: Sample
            trigger_value: float | None, peak_value: float | None,
            severity: str, message: str) -> dict:
     return {
-        "code": code, "rule_id": rule_id, "field": field,
-        "start_s": start.timestamp_s, "confirmed_s": confirmed.timestamp_s,
-        "recovered_s": None, "status": "active",
-        "trigger_value": trigger_value, "peak_value": peak_value,
-        "row_start": start.row_number, "row_confirm": confirmed.row_number,
-        "row_recover": None, "severity": severity, "message": message,
+        "code": code,
+        "rule_id": rule_id,
+        "field": field,
+        "start_s": start.timestamp_s,
+        "confirmed_s": confirmed.timestamp_s,
+        "recovered_s": None,
+        "status": "active",
+        "trigger_value": trigger_value,
+        "peak_value": peak_value,
+        "row_start": start.row_number,
+        "row_confirm": confirmed.row_number,
+        "row_recover": None,
+        "severity": severity,
+        "message": message,
     }
 
 
@@ -478,6 +523,8 @@ def _sensor_events(samples: list[Sample], channels: list[str] | None = None) -> 
             elif active is not None:
                 _recover(active, sample)
                 active = None
+        if len(events) > MAX_EVENTS:
+            raise DatasetError("Analysis exceeds the 100000-event limit.")
     return events
 
 
@@ -489,7 +536,7 @@ def _gap_events(samples: list[Sample], max_gap_s: float) -> list[dict]:
             event = _event(
                 "SAMPLE_GAP", "sample_gap", "timestamp_s", before, after,
                 gap, gap, "warning",
-                "Sampling interval exceeds a rule limit.",
+                "Sampling interval exceeds a rule limit; continuous fault or recovery is not inferred across this gap.",
             )
             _recover(event, after)
             events.append(event)
@@ -527,12 +574,18 @@ def _quality_events(samples: list[Sample], channels: list[str], config: QualityC
                 if outside and bounds_active is None:
                     bounds_active = _event(
                         "SENSOR_IMPLAUSIBLE", "quality_bounds", field, sample, sample, value, value,
-                        "warning", "Reading is outside user-configured plausibility bounds.",
+                        "warning", "Reading is outside user-configured plausibility bounds; not a validated physical fault.",
                     )
                     events.append(bounds_active)
                 elif not outside and bounds_active is not None:
                     _recover(bounds_active, sample)
                     bounds_active = None
+                elif outside and bounds_active is not None:
+                    # Keep the reading furthest outside the configured interval.
+                    def distance(reading):
+                        return max(bounds[0] - reading, reading - bounds[1], 0.0)
+                    if distance(value) > distance(bounds_active["peak_value"]):
+                        bounds_active["peak_value"] = value
             if stuck_s is not None:
                 if stuck_active is not None and abs(value - stuck_active["trigger_value"]) > epsilon:
                     _recover(stuck_active, sample)
@@ -546,7 +599,7 @@ def _quality_events(samples: list[Sample], channels: list[str], config: QualityC
                     stuck_active = _event(
                         "SENSOR_STUCK", "quality_stuck", field, anchor, sample,
                         anchor_value, value, "warning",
-                        "Low-variation run exceeded a configured duration.",
+                        "Low-variation run exceeded a configured duration; stable real conditions can produce the same pattern.",
                     )
                     stuck_active["epsilon"] = epsilon
                     events.append(stuck_active)
@@ -556,12 +609,15 @@ def _quality_events(samples: list[Sample], channels: list[str], config: QualityC
                 if rate > max_rate:
                     spike = _event(
                         "SENSOR_SPIKE", "quality_spike", field, previous, sample, value, value,
-                        "warning", "Observed sample-to-sample rate exceeded a configured limit.",
+                        "warning", "Observed sample-to-sample rate exceeded a configured limit; no interpolated waveform is inferred.",
                     )
                     spike["rate_per_s"] = rate if math.isfinite(rate) else None
+                    spike["rate_exceeds_numeric_range"] = not math.isfinite(rate)
                     _recover(spike, sample)
                     events.append(spike)
             previous, previous_value = sample, value
+        if len(events) > MAX_EVENTS:
+            raise DatasetError("Analysis exceeds the 100000-event limit.")
     return events
 
 
@@ -583,6 +639,12 @@ def _rule_fields(rule: Rule, channels: list[str]) -> list[str]:
 
 def analyze(dataset: Dataset, rules: list[Rule] | None = None,
             quality: QualityConfig | None = None) -> dict:
+    """Analyze timestamped readings, generating stable evidence identifiers.
+
+    The result only establishes conditions at observed samples. Pending timers
+    reset on missing readings or excessive sampling gaps. Confirmed faults stay
+    latched through unknown intervals until sampled recovery is confirmed.
+    """
     selected = _validate_rules(default_rules() if rules is None else rules)
     quality_config = _validate_quality(quality)
     samples = _validate_samples(dataset)

@@ -1,0 +1,19 @@
+{
+  "description": "Illustrative offline software profile only; not validated battery protection or sensor calibration. Positive current means discharge unless the importer explicitly selects positive_charge.",
+  "rules": [
+    {"rule_id":"charge_overcurrent","code":"CHARGE_OVERCURRENT","field":"current_a","direction":"abs_high","threshold":40,"recovery_threshold":35,"confirm_s":2,"recovery_s":2,"current_mode":"charge"},
+    {"rule_id":"discharge_overcurrent","code":"DISCHARGE_OVERCURRENT","field":"current_a","direction":"abs_high","threshold":60,"recovery_threshold":50,"confirm_s":2,"recovery_s":2,"current_mode":"discharge"},
+    {"rule_id":"undervoltage","code":"UNDERVOLTAGE","field":"cell_voltage_v","direction":"low","threshold":3.0,"recovery_threshold":3.2,"confirm_s":2,"recovery_s":2},
+    {"rule_id":"overvoltage","code":"OVERVOLTAGE","field":"cell_voltage_v","direction":"high","threshold":4.25,"recovery_threshold":4.15,"confirm_s":2,"recovery_s":2},
+    {"rule_id":"overtemperature","code":"OVERTEMPERATURE","field":"temperature_c","direction":"high","threshold":60,"recovery_threshold":55,"confirm_s":3,"recovery_s":2},
+    {"rule_id":"cell_imbalance","code":"CELL_IMBALANCE","field":"cell_spread_v","direction":"high","threshold":0.2,"recovery_threshold":0.1,"confirm_s":2,"recovery_s":2},
+    {"rule_id":"temperature_spread","code":"TEMPERATURE_SPREAD","field":"temperature_spread_c","direction":"high","threshold":10,"recovery_threshold":5,"confirm_s":2,"recovery_s":2}
+  ],
+  "quality": {
+    "bounds": {"cell_voltage_v":[0,6],"temperature_c":[-50,120],"current_a":[-500,500]},
+    "stuck_s": {"cell_voltage_v":8},
+    "stuck_epsilon": {"cell_voltage_v":0.001},
+    "max_rate": {"cell_voltage_v":1.0,"temperature_c":20.0},
+    "max_gap_s":2.0
+  }
+}

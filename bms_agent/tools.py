@@ -1,4 +1,4 @@
-"""Bounded, deterministic tools."""
+"""Bounded, deterministic tools. The model never receives filesystem access."""
 
 from __future__ import annotations
 
@@ -32,6 +32,7 @@ def integer(value: Any, name: str, low: int, high: int) -> int:
 
 
 def audit_value(value: Any) -> Any:
+    """Keep rejected arguments JSON-safe too, so failure reports remain writable."""
     if isinstance(value, float) and not math.isfinite(value):
         return "[NONFINITE]"
     if isinstance(value, dict):
@@ -78,6 +79,7 @@ class Toolbox:
             if name not in self._allowed:
                 raise ValueError("Unknown tool")
             result = self._allowed[name](**arguments)
+            # Reject non-JSON values, including NaN/Infinity, before a tool result reaches a model.
             encoded = json.dumps(result, ensure_ascii=False, allow_nan=False)
             if len(encoded) > 32_000:
                 raise ValueError("Tool response too large; request a smaller page or window")
@@ -91,12 +93,15 @@ class Toolbox:
             return result
         except (ValueError, TypeError, KeyError) as exc:
             entry.update(status="failed", error=type(exc).__name__)
+            # Do not echo arbitrary model arguments or raw source cells back into error text.
             raise ValueError("Invalid tool arguments or tool budget exhausted") from None
 
     def _summary(self) -> dict[str, Any]:
         summary = dict(self.analysis["summary"])
         channels = summary.get("channels", {})
         names = sorted(summary["stats"])
+        # Complete data stays in the local report. Bound duplicated channel
+        # descriptions/statistics in the mandatory model tool for wide logs.
         summary["stats"] = {name: summary["stats"][name] for name in names[:12]}
         summary["stats_total_channels"] = len(names)
         summary["stats_returned_channels"] = min(12, len(names))
@@ -162,6 +167,8 @@ class Toolbox:
         if start_s > end_s:
             raise ValueError("Window is reversed")
         selected = [sample for sample in self.dataset.samples if start_s <= sample.timestamp_s <= end_s]
+        # Deterministic priority sampling: endpoints, signal extrema, then event
+        # boundaries. Capacity shortfalls are explicit, never a fidelity claim.
         from . import domain
         readings = getattr(domain, "sample_readings", lambda sample: {
             name: getattr(sample, name) for name in domain.SENSOR_FIELDS
@@ -190,6 +197,8 @@ class Toolbox:
                         add(positions[event[key]], f"event:{key}")
         chosen = set(critical[:max_samples])
         if len(chosen) < min(max_samples, len(selected)):
+            # Choose the point most distant from existing retained samples.
+            # This fills gaps without replacing an already retained key point.
             while len(chosen) < min(max_samples, len(selected)):
                 candidate = max((index for index in range(len(selected)) if index not in chosen),
                                 key=lambda index: (min(abs(index - present) for present in chosen), -index))
