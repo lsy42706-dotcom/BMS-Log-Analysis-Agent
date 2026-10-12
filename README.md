@@ -2,11 +2,13 @@
 
 电子信息/BMS方向的纯软件项目：上传或读取电压、电流、温度CSV，确定性规则生成证据；可选Agent决定如何取证，程序核验事实后生成报告。
 
-每位使用者自行提供自己的OpenAI API Key，费用归属该Key的项目。默认离线，不需要Key、不调用API；没有作者Key、共享Key或自动创建Key。界面仅在本机运行，不是多租户公网服务。
+**在线体验**：https://bms-log-agent.lsy42706.chatgpt.site
+
+每位使用者自行提供自己的OpenAI API Key，费用归属该Key的项目。默认离线，不需要Key、不调用API；没有作者Key、共享Key或自动创建Key。本地版界面仅在本机运行；公开版部署在Cloudflare Workers，CSV经HTTPS送至后端分析。
 
 ## 快速体验
 
-需要Python 3.10+，从项目目录运行；已有 `.venv` 可以直接使用。
+在线版直接打开上方链接即可使用；本地版需要Python 3.10+，从项目目录运行；已有 `.venv` 可以直接使用。
 
 ```powershell
 python -m venv .venv
@@ -14,7 +16,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m bms_agent.web --port 8765
 ```
 
-打开启动时显示的 http://127.0.0.1:8765 ，点击“载入演示数据”或选择UTF-8 CSV，再“开始分析”。支持列映射、单位换算、规则/质量配置、通道切换、点击事件定位窗口和JSON/Markdown导出。环境变量PORT可设默认端口，显式--port优先。Ctrl+C停止服务。
+打开启动时显示的 http://127.0.0.1:8765 （本地版），或直接使用在线版 https://bms-log-agent.lsy42706.chatgpt.site ，点击”载入演示数据”或选择UTF-8 CSV，再”开始分析”。支持列映射、单位换算、规则/质量配置、通道切换、点击事件定位窗口和JSON/Markdown导出。环境变量PORT可设默认端口，显式--port优先。Ctrl+C停止本地服务。
 
 仅支持127.0.0.1，不能直接改为公网/LAN监听。页面不使用浏览器持久化存储；上传、分析缓存和Key仅在进程/页面内存，导出由使用者自行保存。Key提交时立即清空，不回退环境变量；再次Agent分析需要重新输入。
 
