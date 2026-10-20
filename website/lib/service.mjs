@@ -220,7 +220,8 @@ export function markdownReport(payload) {
     `- 配置/导入指纹：${cell(payload.analysis_fingerprint)}`, `- 电流约定：${cell(summary.current_convention ?? "positive_discharge")}`,
     "", "```json", JSON.stringify({ rules: analysis.rules, quality: analysis.quality_configuration ?? null }, null, 2), "```",
     "", "## 用量", "", "```json", JSON.stringify(payload.usage ?? {}, null, 2), "```", "",
-    payload.mode === "offline" ? "离线模式未调用模型，API 用量为零。" : "Token 用量为已返回的 SDK 用量；未返回请求另记为未知，不假报零。软件预算不是绝对 Token 或金额上限；不自动重试。",
+    payload.mode === "browser" ? "免费模型在浏览器设备运行，付费 API 调用数为零；local_inference 为本地推理用量，不是 API 账单。" :
+      payload.mode === "offline" ? "离线模式未调用模型，API 用量为零。" : "Token 用量为已返回的 SDK 用量；未返回请求另记为未知，不假报零。软件预算不是绝对 Token 或金额上限；不自动重试。",
     "", "## 局限", "");
   for (const limitation of conclusion.limitations ?? []) lines.push(`- ${cell(limitation)}`);
   if (payload.error) lines.push(`- ${cell(payload.error)}`);

@@ -2,7 +2,7 @@
 
 export const PUBLIC_ORIGIN = "https://bms-log-agent.lsy42706.chatgpt.site";
 export const MAX_BODY_BYTES = 768 * 1024;
-export const CSP = "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'";
+export const CSP = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co https://raw.githubusercontent.com; worker-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'";
 const HEADERS = {"Content-Type":"application/json; charset=utf-8", "Cache-Control":"no-store", "Content-Security-Policy":CSP,
   "X-Content-Type-Options":"nosniff", "Referrer-Policy":"no-referrer", "X-Frame-Options":"DENY"};
 const ANALYZE_FIELDS = new Set(["csv_text","source_name","column_map","units","profile","current_convention","pack_id","mode","question","api_key","model","max_turns","timeout_s","max_output_tokens","max_total_tokens"]);
@@ -113,4 +113,4 @@ export async function handleRequest(request, operation, callbacks={}) {
   }finally{release();}
 }
 
-export function healthResponse(){return response(200,{status:"ok",public:true,byok:true,default_mode:"offline",data_persistence:false});}
+export function healthResponse(){return response(200,{status:"ok",public:true,byok:true,default_mode:"offline",default_ui_mode:"browser",free_model:"Qwen3-1.7B",free_inference:"browser_only",data_persistence:false});}

@@ -4,7 +4,14 @@
 
 **在线体验**：https://bms-log-agent.lsy42706.chatgpt.site
 
-每位使用者自行提供自己的OpenAI API Key，费用归属该Key的项目。默认离线，不需要Key、不调用API；没有作者Key、共享Key或自动创建Key。本地版界面仅在本机运行；公开版部署在Cloudflare Workers，CSV经HTTPS送至后端分析。
+本仓库包含两个版本：
+
+- **公开网页版（`website/`）**：默认 **Qwen3-1.7B**，通过 WebLLM 在使用者浏览器本地推理，无需 API Key、不产生付费 API 调用；免费模式的 CSV、问题与证据不上传。首次需允许下载模型，并具备 WebGPU 及足够 GPU/共享内存。设备算力、存储、流量和电量由使用者承担。
+- **Python 本地版（仓库根目录）**：仍默认离线规则分析，不需要 Key、不调用模型 API，界面仅监听本机。原有 CLI、评测和恢复功能保持不变。
+
+网页版的免费模型只审阅前 6 个事件及问题前 500 字符，确定性规则仍扫描全部采样；运行失败或取消会明确回退到本地规则，不会自动转付费模型。只有主动选择高级付费 Agent 并填写本次自己的 Key 才会调用付费 API，费用归属该 Key 对应的项目；没有作者或共享 Key。手动选择“本站规则分析”或“高级付费 Agent”时，CSV 会经 HTTPS 发送至本站后端。
+
+2026-10-20：免费模型更新已同步至 `website/`。网页版 93 项 Node 测试通过，并完成真实 Qwen3-1.7B 的 31 采样演示推理（3 个保护事件，证据引用 3/3）；仅为合成样例功能验收，不是电池安全认证或模型效果基准。源码复现和隐私边界见 [网页版说明](website/README.md)。下文的 Python 启动、七项升级和评测说明主要对应本地版。
 
 ## 快速体验
 
@@ -196,3 +203,4 @@ checkpoint.json    仅Agent；无Key或原始模型文本
 ## 技术依据
 
 保持现有代码先行的SDK架构，不迁移托管执行环境。[官方SDK指南](https://developers.openai.com/api/docs/guides/agents/sdk)；本地重播参考[运行指南](https://developers.openai.com/api/docs/guides/agents/running-agents)。依赖固定openai-agents==0.23.1，真实模型未调用。
+

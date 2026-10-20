@@ -54,3 +54,11 @@ next-env.d.ts
 /.codex/
 /outputs/
 /work/
+
+# Rebuilt browser inference bundles; weights are never committed.
+/public/assets/local-built/
+
+# GitHub export: keep deployment identity and compiler caches local.
+/.openai/hosting.json
+/tsconfig.tsbuildinfo
+

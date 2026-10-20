@@ -11,6 +11,8 @@
     {name: "temperature_c", label: "温度", units: ["degC", "K"]},
   ];
   const state = {csv: "", source: "", input: null, result: null, waveform: null, page: 0, busy: false, selectedEvent: null, fileRead: 0};
+  let localModule = null, localController = null;
+  const loadLocal = async () => localModule || (localModule = await import('/assets/local-built/entry.js'));
 
   function element(tag, text, className) {
     const node = document.createElement(tag);
@@ -38,6 +40,8 @@
     $("reset-window").disabled = value;
     $("csv-file").disabled = value;
     $("load-demo").disabled = value;
+    $("mode").disabled = value;
+    $("cancel-local").hidden = !(value && $("mode").value === "browser");
     if (message) $("run-status").textContent = message;
   }
 
@@ -124,6 +128,7 @@
   $("mode").addEventListener("change", () => {
     const enabled = $("mode").value === "agent";
     $("agent-settings").hidden = !enabled;
+    $("free-settings").hidden = $("mode").value !== "browser";
     $("api-key").required = enabled; $("model").required = enabled;
     if (!enabled) $("api-key").value = "";
   });
@@ -181,22 +186,37 @@
       $("api-key").value = "";
       setBusy(true, payload.mode === "agent" ? "模型分析中；本次调用可能计费…" : "离线规则分析中…");
       $("results").hidden = true;
-      const pending = request("/api/analyze", payload);
-      delete payload.api_key;
-      const result = await pending;
+      let result;
+      if (payload.mode === "browser") {
+        // No key, model endpoint, cookies or uploaded CSV are sent over the network in free mode.
+        localController = new AbortController();
+        $("run-status").textContent = "正在本地解析 CSV 与执行规则…";
+        const local = await loadLocal();
+        result = await local.analyzeFree({...state.input,question:payload.question},{
+          consent:$("model-consent").checked,signal:localController.signal,
+          onProgress:message=>{ $("run-status").textContent=message; }});
+      } else {
+        const pending = request("/api/analyze", payload);
+        delete payload.api_key;
+        result = await pending;
+      }
       if (!result.report?.analysis || !result.waveform) throw new Error("分析结果缺少必要字段。");
       state.result = result; state.waveform = result.waveform; state.page = 0; state.selectedEvent = null;
       renderResult();
-      $("run-status").textContent = result.report.status === "complete" ? "分析完成 · 结果可导出" : "模型未完成 · 已保留离线证据";
+      $("run-status").textContent = result.report.status === "complete" ? "分析完成 · 结果可导出" :
+        result.report.status === "fallback" ? "免费 AI 未完成 · 已保留本地规则结果 · 无付费 API 调用" : "模型未完成 · 已保留离线证据";
     } catch (error) {
       showError(error.message || "分析未完成，请稍后重试。");
       $("run-status").textContent = "本次分析未完成";
     } finally {
       if (payload) delete payload.api_key;
       $("api-key").value = "";
+      localController = null;
       setBusy(false);
     }
   });
+  $("cancel-local").addEventListener("click", () => { localController?.abort(); });
+  $("model-consent").addEventListener("change", () => { if (!$("model-consent").checked) localController?.abort(); });
 
   function renderResult() {
     const report = state.result.report, summary = report.analysis.summary, conclusion = report.conclusion || {};
@@ -208,7 +228,7 @@
     const coverage = conclusion.coverage || report.coverage;
     if (coverage && typeof coverage === "object") {
       const scan = coverage.deterministic_scan_complete ? "完成" : "未确认";
-      const owner = report.mode === "offline" ? "离线程序" : "模型";
+      const owner = report.mode === "offline" || report.local_ai?.model_used === false ? "规则程序" : "模型选择证据、程序核验";
       const complete = coverage.mode === "full" ? "完整取证" : "部分取证";
       $("coverage-note").textContent = `全量规则扫描：${scan}；逐项引用 ${format(coverage.cited_events)} / ${format(coverage.total_events)}；未引用 ${format(coverage.remaining_events)}；${owner}${complete}。`;
     } else {
@@ -217,7 +237,10 @@
     $("limitations").replaceChildren();
     for (const limitation of conclusion.limitations || []) $("limitations").append(element("li", limitation));
     const usage = report.usage || {};
-    $("usage-note").textContent = report.mode === "offline" ? "离线模式：未调用模型，API 用量为零。" : `本次 SDK 用量：请求 ${format(usage.requests)}，输入 ${format(usage.input_tokens)} token，输出 ${format(usage.output_tokens)} token。未知用量不代表未计费；未估算货币费用。`;
+    $("usage-note").textContent = report.mode === "browser" ?
+      (report.local_ai?.model_used ? `免费本地 Qwen3-1.7B：付费 API 调用数 0。本地模型输入 ${format(usage.local_inference?.input_tokens)}、输出 ${format(usage.local_inference?.output_tokens)} token（设备计算，不是 API 账单）。` :
+        `免费 AI 未运行完成：${report.local_ai?.reason || "请检查设备与模型下载"} 这里显示本地规则结果，付费 API 调用数 0。`) :
+      report.mode === "offline" ? "本站规则模式：未调用模型，API 用量为零；CSV 已发送至本站后端。" : `本次 SDK 用量：请求 ${format(usage.requests)}，输入 ${format(usage.input_tokens)} token，输出 ${format(usage.output_tokens)} token。未知用量不代表未计费；未估算货币费用。`;
     $("window-start").value = summary.start_s; $("window-end").value = summary.end_s;
     $("event-details").hidden = true;
     $("results").hidden = false;
@@ -329,7 +352,8 @@
     if (state.busy || !state.input || !numeric(start) || !numeric(end) || start > end) { if (!state.busy) showError("请输入有限、递增的窗口时间。"); return; }
     showError(""); setBusy(true, "读取离线证据窗口…");
     try {
-      state.waveform = await request("/api/window", {...state.input, start_s: start, end_s: end, max_samples: 50});
+      const payload = {...state.input, start_s: start, end_s: end, max_samples: 50};
+      state.waveform = state.result.report.mode === "browser" ? await (await loadLocal()).inspectLocally(payload) : await request("/api/window", payload);
       $("window-start").value = start; $("window-end").value = end; buildChannels();
       if (event) {
         const names = channels().map((channel) => channel.id);
@@ -370,6 +394,6 @@
     download(state.result.report_markdown, "md", "text/markdown;charset=utf-8");
   });
 
-  // No API credentials or uploaded content are written to browser storage.
+  // Only the inference engine may cache public model artifacts; never CSV, questions or keys.
   buildMapping([]);
 })();

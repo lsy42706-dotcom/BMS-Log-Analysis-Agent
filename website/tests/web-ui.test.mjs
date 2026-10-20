@@ -24,17 +24,17 @@ class Element {
   remove() {}
 }
 
-function browser(fetch = async () => ({ ok: true, json: async () => ({}) })) {
+function browser(fetch = async () => ({ ok: true, json: async () => ({}) }), localFixture = null) {
   const elements = new Map();
   const document = {
     getElementById(id) { if (!elements.has(id)) { const el = new Element("div", elements); el.id = id; } return elements.get(id); },
     createElement(tag) { return new Element(tag, elements); },
     body: new Element("body", elements),
   };
-  const sandbox = { document, fetch, TextEncoder, TextDecoder, Blob, URL, setTimeout, window: { devicePixelRatio: 1, addEventListener() {} } };
+  const sandbox = { document, fetch, TextEncoder, TextDecoder, Blob, URL, setTimeout, AbortController, localFixture, window: { devicePixelRatio: 1, addEventListener() {} } };
   vm.createContext(sandbox);
   // Expose internal helpers only in this in-memory test copy; the public script has no test API.
-  vm.runInContext(script.replace("  buildMapping([]);", "  globalThis.fixture = {readHeaders, format, channels, request, setUpload, state};\n  buildMapping([]);"), sandbox);
+  vm.runInContext(script.replace("  buildMapping([]);", "  globalThis.fixture = {readHeaders, format, channels, request, setUpload, state};\n  buildMapping([]);").replace(/  const loadLocal = .*\n/, '  const loadLocal = async () => globalThis.localFixture;\n'), sandbox);
   for (const [id, value] of Object.entries({ mode: "offline", question: "检查保护事件", "current-convention": "positive_discharge", "max-turns": "8", timeout: "60", "max-output": "1200", "max-total": "24000" })) document.getElementById(id).value = value;
   return { fixture: sandbox.fixture, document, elements };
 }
@@ -44,7 +44,10 @@ function standardUpload(env) {
 }
 
 test("public UI declares server-bound logs and BYOK billing", () => {
-  assert.match(html, /公开工作台 · 默认离线/);
+  assert.match(html, /公开工作台 · 默认免费 Qwen3-1.7B/);
+  assert.match(html, /value="browser" selected/);
+  assert.match(html, /本地推理/);
+  assert.match(html, /不勾选时仅显示本地规则结果/);
   assert.match(html, /通过 HTTPS 将日志发送至本站服务/);
   assert.match(html, /不表示日志仅留在浏览器/);
   assert.match(html, /你的 API 账户计费/);
@@ -65,7 +68,8 @@ test("hosted limits are visible and compatible with the backend", () => {
 test("public UI uses same-site assets, no browser persistence or unsafe HTML sinks", () => {
   assert.match(html, /href="\/assets\/style\.css"/);
   assert.match(html, /src="\/assets\/app\.js"/);
-  assert.doesNotMatch(html, /https?:\/\/[^\s"<>]+/);
+  assert.doesNotMatch(html, /<script[^>]+src="https?:/);
+  assert.match(html, /http-equiv="Content-Security-Policy"/);
   assert.doesNotMatch(script, /localStorage|sessionStorage|indexedDB|document\.cookie|innerHTML|insertAdjacentHTML/);
   assert.doesNotMatch(script, /X-BMS-Local/);
   assert.match(script, /"X-BMS-Request": "1"/);
@@ -159,4 +163,48 @@ test("demo data stays synthetic and file size rejection happens before reading",
   assert.equal(read, false);
   assert.equal(env.fixture.state.csv, "");
   assert.match(env.document.getElementById("error-message").textContent, /512 KiB/);
+});
+
+function freeResult(fallback=false) {
+  return {report:{mode:'browser',status:fallback?'fallback':'complete',analysis:{summary:{sample_count:1,
+    fault_event_count:0,quality_event_count:0,duration_s:0,start_s:0,end_s:0},events:[]},
+    conclusion:{summary:'本地结果',limitations:[]},usage:{requests:0,local_inference:{input_tokens:10,output_tokens:2}},
+    local_ai:{model_used:!fallback,reason:fallback?'尚未允许首次模型下载。':null}},waveform:{samples:[]},report_markdown:'# Local report'};
+}
+test('default free submission never posts CSV or stale credentials to the hosted API',async()=>{
+  let net=0,received;
+  const local={analyzeFree:async(payload,options)=>{received={payload,options};return freeResult();}};
+  const env=browser(async()=>{net++;throw new Error('No remote requests');},local);
+  standardUpload(env);env.document.getElementById('mode').value='browser';
+  env.document.getElementById('api-key').value='TEST_ONLY_STALE_KEY';
+  env.document.getElementById('model-consent').checked=true;
+  await env.document.getElementById('analysis-form').listeners.submit({preventDefault(){}});
+  assert.equal(net,0);assert.equal(received.options.consent,true);
+  assert.equal(Object.hasOwn(received.payload,'api_key'),false);assert.equal(Object.hasOwn(received.payload,'mode'),false);
+  assert.equal(env.document.getElementById('api-key').value,'');
+  assert.ok(!JSON.stringify(env.fixture.state).includes('TEST_ONLY_STALE_KEY'));
+  assert.match(env.document.getElementById('usage-note').textContent,/付费 API 调用数 0/);
+});
+test('free fallback is labelled honestly and evidence windows stay local',async()=>{
+  let net=0,windowCalls=0;
+  const local={analyzeFree:async()=>freeResult(true),inspectLocally:async()=>{windowCalls++;return {samples:[]};}};
+  const env=browser(async()=>{net++;throw new Error('No remote requests');},local);
+  standardUpload(env);env.document.getElementById('mode').value='browser';
+  await env.document.getElementById('analysis-form').listeners.submit({preventDefault(){}});
+  assert.match(env.document.getElementById('run-status').textContent,/免费 AI 未完成/);
+  assert.match(env.document.getElementById('usage-note').textContent,/本地规则/);
+  env.document.getElementById('window-start').value='0';env.document.getElementById('window-end').value='1';
+  await env.document.getElementById('inspect-window').listeners.click();
+  // The click listener dispatches the async helper without awaiting it.
+  await new Promise(resolve=>setTimeout(resolve,0));
+  assert.equal(net,0);assert.equal(windowCalls,1);
+});
+test('switching from paid to free removes the key and hides paid settings',()=>{
+  const env=browser();env.document.getElementById('mode').value='browser';
+  env.document.getElementById('api-key').value='TEST_ONLY_STALE_KEY';
+  env.document.getElementById('mode').listeners.change();
+  assert.equal(env.document.getElementById('api-key').value,'');
+  assert.equal(env.document.getElementById('api-key').required,false);
+  assert.equal(env.document.getElementById('agent-settings').hidden,true);
+  assert.equal(env.document.getElementById('free-settings').hidden,false);
 });

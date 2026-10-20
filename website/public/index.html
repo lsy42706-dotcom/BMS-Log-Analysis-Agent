@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="上传 BMS 采样日志，核查保护事件与关键波形。默认规则分析不调用模型，可选择使用自己的 API Key。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co https://raw.githubusercontent.com; worker-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="description" content="默认免费 Qwen3-1.7B 浏览器本地推理，无需 API Key；高级付费模型由使用者自行接入 Key。">
   <title>BMS 日志分析 · 公开工作台</title>
   <link rel="stylesheet" href="/assets/style.css">
   <script src="/assets/app.js" defer></script>
@@ -12,10 +13,10 @@
 <body>
   <main class="workspace">
     <header class="topbar">
-      <div><p class="eyebrow">BATTERY DIAGNOSTICS / PUBLIC WORKSPACE</p><h1>BMS 日志分析</h1><p class="intro">上传采样日志，查看规则证据与关键波形。</p></div>
-      <span class="status-pill">公开工作台 · 默认离线</span>
+      <div><p class="eyebrow">BATTERY DIAGNOSTICS / PUBLIC WORKSPACE</p><h1>BMS 日志分析</h1><p class="intro">导入采样日志，查看规则证据与关键波形。</p></div>
+      <span class="status-pill">公开工作台 · 默认免费 Qwen3-1.7B</span>
     </header>
-    <section class="notice">这是软件演示分析，不是实物电池安全认证，也不证明物理故障根因。公开版本会通过 HTTPS 将日志发送至本站服务；“离线”表示不调用模型，不表示日志仅留在浏览器。应用不主动持久化日志与 Key，导出文件由你自行保存。请勿上传敏感生产数据。</section>
+    <section class="notice">这是软件演示分析，不是实物电池安全认证，也不证明物理故障根因。默认免费模型在你的浏览器本地推理：CSV、问题和证据不上传，不调用付费 API。首次运行需下载并缓存公开模型文件。选择“本站规则分析”或“付费 Agent”才会通过 HTTPS 将日志发送至本站服务；规则模式不调用模型，但不表示日志仅留在浏览器。应用不主动持久化日志与 Key，导出文件由你自行保存。请勿上传敏感生产数据。</section>
     <form id="analysis-form" class="panel input-panel">
       <div class="section-heading"><h2>01 / 输入与配置</h2><span class="muted">公开版：UTF-8 CSV · 最大 512 KiB / 3,000 行 / 16 通道</span></div>
       <div class="upload-row"><label class="file-label" for="csv-file">选择 BMS 日志<input id="csv-file" type="file" accept=".csv,text/csv" required></label><span id="file-status" class="muted">尚未选择文件</span><button type="button" id="load-demo" class="secondary">载入演示数据</button></div>
@@ -25,12 +26,17 @@
         <div class="two-column"><label>附加列映射 JSON（canonical → 原列名）<textarea id="extra-map" rows="3" placeholder='{"cell_voltage_v_C01":"电芯1"}'></textarea></label><label>附加单位 JSON<textarea id="extra-units" rows="3" placeholder='{"cell_voltage_v_C01":"mV"}'></textarea></label></div>
         <div class="two-column"><label>规则/质量配置 JSON（可选）<textarea id="profile" rows="4" placeholder="使用演示配置；可粘贴项目支持的配置对象"></textarea></label><div><label>电流约定<select id="current-convention"><option value="positive_discharge">正值为放电</option><option value="positive_charge">正值为充电</option></select></label><label>电池组标识（可选）<input id="pack-id" maxlength="128" placeholder="pack-demo"></label></div></div>
       </div></details>
-      <div class="two-column mode-row"><label>分析模式<select id="mode"><option value="offline">离线规则分析 · 无 API 费用</option><option value="agent">Agent 分析 · 使用本次提供的 Key</option></select></label><label>分析问题<textarea id="question" rows="2" maxlength="4000">分析保护事件与数据质量，引用证据并说明确认和恢复过程。</textarea></label></div>
+      <div class="two-column mode-row"><label>分析模式<select id="mode"><option value="browser" selected>免费 Qwen3-1.7B · 浏览器本地 · 无需 Key</option><option value="offline">本站规则分析 · 不调用模型</option><option value="agent">高级付费 Agent · 使用自己的 Key</option></select></label><label>分析问题<textarea id="question" rows="2" maxlength="4000">分析保护事件与数据质量，引用证据并说明确认和恢复过程。</textarea></label></div>
+      <fieldset id="free-settings"><legend>默认免费模型 · Qwen3-1.7B</legend>
+        <p class="hint">无需 API Key，也不产生付费 API 调用。需要支持 WebGPU 的浏览器和足够 GPU/共享内存（官方四位量化估算约 2–2.7 GB，另需浏览器开销）。首次下载较大，流量、磁盘、电量由你的设备承担；公开模型文件来自 Hugging Face / MLC，不发送日志。模型文件可被浏览器缓存，日志和问题不持久保存。</p>
+        <p class="hint">免费模型只审阅前 6 个事件及问题前 500 字符；规则仍完整扫描所有采样。三项工具由程序固定读取，模型选择证据后由程序重建和核验数值，不保证电池根因诊断。模型失败会明确回退到本地规则，不会自动转用付费模型。</p>
+        <label class="download-consent"><input type="checkbox" id="model-consent">我允许在本设备下载、缓存并运行免费模型（首次最多等待 6 分钟，可取消）。不勾选时仅显示本地规则结果。</label>
+      </fieldset>
       <fieldset id="agent-settings" hidden><legend>仅本次调用 · BYOK</legend><p class="hint">模型调用会使用你本次提供的 Key，并可能在你的 API 账户计费；本站没有作者或共享 Key。Key 经 HTTPS 传至本站服务，仅用于本次请求，提交后立即从输入框清空，失败时需重新填写。Agent 模式还会将必要日志证据发送至 OpenAI。不要把 Key 放入日志或问题中。</p>
         <div class="two-column"><label>本次 API Key<input id="api-key" type="password" autocomplete="off" spellcheck="false" maxlength="1024"></label><label>你有权限调用的模型 ID<input id="model" autocomplete="off" maxlength="256" placeholder="输入模型 ID"></label></div>
         <div class="limits-grid"><label>最多轮次<input id="max-turns" type="number" min="4" max="12" value="8"></label><label>超时（秒）<input id="timeout" type="number" min="10" max="60" value="60"></label><label>单轮输出 token<input id="max-output" type="number" min="256" max="2000" value="1200"></label><label>总 token 预算<input id="max-total" type="number" min="2000" max="48000" value="24000"></label></div>
       </fieldset>
-      <div class="form-actions"><button type="submit" id="analyze-button">开始分析</button><span id="run-status" role="status" aria-live="polite">准备上传日志</span></div>
+      <div class="form-actions"><button type="submit" id="analyze-button">开始分析</button><button type="button" id="cancel-local" class="secondary" hidden>取消本地模型</button><span id="run-status" role="status" aria-live="polite">准备上传日志 · 默认免费模型</span></div>
       <p id="error-message" class="error" role="alert" hidden></p>
     </form>
     <section id="results" hidden>

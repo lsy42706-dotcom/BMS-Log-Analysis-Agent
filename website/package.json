@@ -6,6 +6,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "build:browser": "node scripts/build-browser.mjs",
     "install:ci": "node scripts/install-ci.mjs",
     "dev": "node scripts/run-framework.mjs dev",
     "build": "node scripts/run-framework.mjs build",
@@ -14,6 +15,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@mlc-ai/web-llm": "0.2.85",
     "@base-ui/react": "^1.7.0",
     "@hookform/resolvers": "^5.7.1",
     "@openai/agents": "0.20.0",
@@ -42,6 +44,7 @@
     "zod": "4.3.6"
   },
   "devDependencies": {
+    "esbuild": "0.28.0",
     "@cloudflare/vite-plugin": "1.37.1",
     "@cloudflare/workers-types": "4.20260515.1",
     "@tailwindcss/postcss": "4.2.1",
